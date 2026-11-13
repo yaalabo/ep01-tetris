@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIが作ったテトリス 6本｜やぁラボ</title>
+<meta name="description" content="RTX PRO 6000 で動かしたローカルAI（Qwen3.8 27B と Flash-Next）が、エージェント（OpenCode）で作ったテトリス6本。手を加えずにそのまま置いています。">
+<style>
+:root { --paper: #fbf8ef; --grid: #c9d9ee; --ink: #222; --sub: #5f5a50; --red: #d73232; --green: #2a9d4b; --card: #fffdf7; --line: #e2dccd; }
+@media (prefers-color-scheme: dark) { :root { --paper: #17181b; --grid: #253041; --ink: #eee; --sub: #a9a396; --card: #212226; --line: #34353a; } }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--paper); font: 16px/1.7 "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 28px 28px; }
+main { max-width: 980px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 28px; line-height: 1.35; margin: 0 0 8px; }
+h1 small { display: block; font-size: 15px; color: var(--sub); font-weight: 600; }
+.lead { margin: 0 0 20px; }
+.box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0 0 22px; }
+.box p { margin: 4px 0; }
+.q { font-weight: 700; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.card h2 { font-size: 19px; margin: 0; display: flex; align-items: center; gap: 8px; }
+.mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-weight: 900; color: #fff; font-size: 16px; }
+.ok { background: var(--green); } .ng { background: var(--red); }
+.meta { color: var(--sub); font-size: 14px; }
+.note { font-size: 14px; }
+.btns { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
+.btns a { text-decoration: none; border-radius: 999px; padding: 7px 16px; font-weight: 700; font-size: 15px; border: 1px solid var(--line); color: var(--ink); }
+.btns a.play { background: var(--red); border-color: var(--red); color: #fff; }
+footer { margin-top: 28px; color: var(--sub); font-size: 14px; }
+footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+<h1><small>やぁラボ 第1回</small>AIが作ったテトリス 6本</h1>
+<p class="lead">業務用グラボ RTX PRO 6000（VRAM 96GB）で動かしたローカルAIに、エージェント（OpenCode）でテトリスを作らせました。<b>6本とも、AIが作ったまま手を加えていません。</b>スマホで崩れるものも、そのままです。</p>
+
+<div class="box">
+<p class="q">AIへのお願い（1回だけ）</p>
+<p>「ブラウザで遊べるテトリスを、HTMLファイル1つ（tetris.html）で作ってください。スマホでも遊べるように、画面にボタンも付けてください。」</p>
+<p class="meta">OpenCode 2.2.7（設定は接続先だけ）／Dockerの中・ネットは遮断・ブラウザなし（AIは画面を見られない）／電力上限450W／1回15分まで／人は途中で手を出していません。○×はスマホ幅（390×844）での見た目です。</p>
+</div>
+
+<div class="grid">
+  <div class="card"><h2><span class="mark ok">○</span>Qwen3.8 27B・1回目</h2>
+    <div class="meta">5分20秒・書いた量 48,851トークン</div>
+    <div class="note">スマホでも問題なし。</div>
+    <div class="btns"><a class="play" href="27b-1/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/27b-1/index.html">コード</a></div></div>
+  <div class="card"><h2><span class="mark ok">○</span>Qwen3.8 27B・2回目</h2>
+    <div class="meta">5分58秒・書いた量 55,796トークン</div>
+    <div class="note">スマホでも問題なし。</div>
+    <div class="btns"><a class="play" href="27b-2/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/27b-2/index.html">コード</a></div></div>
+  <div class="card"><h2><span class="mark ng">×</span>Qwen3.8 27B・3回目</h2>
+    <div class="meta">7分28秒・書いた量 67,256トークン</div>
+    <div class="note">スマホだと背景が白く、スコアなどの文字が薄くてほとんど読めない。</div>
+    <div class="btns"><a class="play" href="27b-3/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/27b-3/index.html">コード</a></div></div>
+  <div class="card"><h2><span class="mark ng">×</span>Flash-Next・1回目</h2>
+    <div class="meta">7分50秒・書いた量 41,793トークン</div>
+    <div class="note">スマホだと盤面が小さくなってボタンに重なり、ページが画面より横に広い。</div>
+    <div class="btns"><a class="play" href="fn-1/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/fn-1/index.html">コード</a></div></div>
+  <div class="card"><h2><span class="mark ok">○</span>Flash-Next・2回目</h2>
+    <div class="meta">5分17秒・書いた量 28,885トークン</div>
+    <div class="note">スマホでも問題なし。</div>
+    <div class="btns"><a class="play" href="fn-2/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/fn-2/index.html">コード</a></div></div>
+  <div class="card"><h2><span class="mark ok">○</span>Flash-Next・3回目</h2>
+    <div class="meta">7分03秒・書いた量 37,909トークン</div>
+    <div class="note">スマホでも問題なし。</div>
+    <div class="btns"><a class="play" href="fn-3/">遊ぶ</a><a href="https://github.com/yaalabo/ep01-tetris/blob/main/fn-3/index.html">コード</a></div></div>
+</div>
+
+<footer>
+<p>コード一式：<a href="https://github.com/yaalabo/ep01-tetris">github.com/yaalabo/ep01-tetris</a></p>
+<p>やぁラボ（YouTube）：ずんだもんと四国めたんが、実機でAIを動かして確かめるチャンネルです。</p>
+</footer>
+</main>
+</body>
+</html>
